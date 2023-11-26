@@ -11,7 +11,7 @@ public class PlayerCombatScript : MonoBehaviour
     public LayerMask enemyLayers;
 
     public int attackDamage = 50;
-    public float attackRate = 2f;
+    public float attackRate = 1f;
     private float nextAttackTime = 0f;
 
     void Update()
@@ -29,7 +29,7 @@ public class PlayerCombatScript : MonoBehaviour
 
     private void Attack()
     {
-        Collider2D[] hitEnemies = Physics2D.OverlapCircleAll(attackPoint.position, attackRange);
+        Collider2D[] hitEnemies = Physics2D.OverlapCircleAll(attackPoint.position, attackRange, enemyLayers);
         foreach(Collider2D enemy in hitEnemies)
         {
             Debug.Log("We hit " + enemy.name);

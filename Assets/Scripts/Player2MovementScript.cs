@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerMovementScript : MonoBehaviour
+public class Player2MovementScript : MonoBehaviour
 {
     Animator animator;
     Rigidbody2D rb;
@@ -31,11 +31,11 @@ public class PlayerMovementScript : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKey(KeyCode.LeftArrow))
+        if (Input.GetKey(KeyCode.A))
         {
             Move(-1.0f);
         }
-        else if (Input.GetKey(KeyCode.RightArrow))
+        else if (Input.GetKey(KeyCode.D))
         {
             Move(1.0f);
         }
@@ -44,12 +44,12 @@ public class PlayerMovementScript : MonoBehaviour
             Move(0.0f);
         }
 
-        if (isGrounded && Input.GetKeyDown(KeyCode.UpArrow))
+        if (isGrounded && Input.GetKeyDown(KeyCode.W))
         {
             Jump();
         }
 
-        if (Input.GetKeyDown(KeyCode.B) && canAttack)
+        if (Input.GetKeyDown(KeyCode.Y) && canAttack)
         {
             StartCoroutine(AttackCooldown());
             animator.SetInteger("PlayerState", (int)AnimationStateEnum.Attacking);
@@ -110,7 +110,7 @@ public class PlayerMovementScript : MonoBehaviour
         yield return new WaitForSeconds(delay);
 
         // Reset animation state to Idle
-        animator.Play("LightBandit_CombatIdle");
+        animator.Play("HeavyBandit_CombatIdle");
     }
 
     private IEnumerator AttackCooldown()
