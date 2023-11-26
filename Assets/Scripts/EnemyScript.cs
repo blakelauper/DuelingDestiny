@@ -8,10 +8,18 @@ public class EnemyScript : MonoBehaviour
     public Animator animator;
     public int maxHealth = 100;
     public int currentHealth;
+    private EnemyMovementScript movementScript; // Reference to EnemyMovementScript
+
     // Start is called before the first frame update
     void Start()
     {
         currentHealth = maxHealth;
+        // Try to find and assign the EnemyMovementScript
+        movementScript = GetComponent<EnemyMovementScript>();
+        if (movementScript == null)
+        {
+            Debug.LogError("EnemyMovementScript not found on the same GameObject.");
+        }
     }
 
     public void TakeDamage(int damage)
@@ -22,7 +30,6 @@ public class EnemyScript : MonoBehaviour
         {
             Die();
         }
-
     }
 
     private void Die()
@@ -42,7 +49,12 @@ public class EnemyScript : MonoBehaviour
             Destroy(rb);
         }
 
+        // Disable the EnemyMovementScript if found
+        if (movementScript != null)
+        {
+            movementScript.enabled = false;
+        }
+
         this.enabled = false;
     }
-
 }
