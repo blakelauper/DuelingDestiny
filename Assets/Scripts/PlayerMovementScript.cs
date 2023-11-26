@@ -7,7 +7,6 @@ public class PlayerMovementScript : MonoBehaviour
     Rigidbody2D rb;
     float MOVE_SPEED = 6.0f;
     float JUMP_FORCE = 7.5f;
-    float xDirection = 0.0f;
     bool isGrounded = false;
     bool canAttack = true;
     float attackCooldown = 2.0f;
@@ -30,13 +29,22 @@ public class PlayerMovementScript : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        xDirection = Input.GetAxisRaw("Horizontal");
-
-        rb.velocity = new Vector2(xDirection * MOVE_SPEED, rb.velocity.y);
-
-        if (isGrounded && Input.GetButtonDown("Jump"))
+        if (Input.GetKey(KeyCode.LeftArrow))
         {
-            rb.velocity = new Vector2(rb.velocity.x, JUMP_FORCE);
+            Move(-1.0f);
+        }
+        else if (Input.GetKey(KeyCode.RightArrow))
+        {
+            Move(1.0f);
+        }
+        else
+        {
+            Move(0.0f);
+        }
+
+        if (isGrounded && Input.GetKeyDown(KeyCode.UpArrow))
+        {
+            Jump();
         }
 
         if (Input.GetKeyDown(KeyCode.B) && canAttack)
@@ -51,15 +59,25 @@ public class PlayerMovementScript : MonoBehaviour
         {
             SetAnimationState();
         }
+    }
 
-        if (xDirection > 0.0f)
+    private void Move(float direction)
+    {
+        rb.velocity = new Vector2(direction * MOVE_SPEED, rb.velocity.y);
+
+        if (direction > 0.0f)
         {
             gameObject.transform.localScale = new Vector3(-1, 1, 1);
         }
-        else if (xDirection < 0.0f)
+        else if (direction < 0.0f)
         {
             gameObject.transform.localScale = new Vector3(1, 1, 1);
         }
+    }
+
+    private void Jump()
+    {
+        rb.velocity = new Vector2(rb.velocity.x, JUMP_FORCE);
     }
 
     private void SetAnimationState()
@@ -68,7 +86,7 @@ public class PlayerMovementScript : MonoBehaviour
 
         if (isGrounded)
         {
-            if (xDirection == 0.0f)
+            if (rb.velocity.x == 0.0f)
             {
                 playerAnimationState = AnimationStateEnum.Idle;
             }
@@ -84,6 +102,7 @@ public class PlayerMovementScript : MonoBehaviour
 
         animator.SetInteger("PlayerState", (int)playerAnimationState);
     }
+
     private IEnumerator ResetAnimationStateAfterDelay(float delay)
     {
         yield return new WaitForSeconds(delay);
