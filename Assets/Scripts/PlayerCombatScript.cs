@@ -10,10 +10,20 @@ public class PlayerCombatScript : MonoBehaviour
     public float attackRange = 0.7f;
     public LayerMask enemyLayers;
 
+    public int attackDamage = 50;
+    public float attackRate = 2f;
+    private float nextAttackTime = 0f;
+
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.B)) {
-            Attack();
+        if (Time.time >= nextAttackTime)
+        {
+            if (Input.GetKeyDown(KeyCode.B))
+            {
+                Attack();
+                nextAttackTime = Time.time + 1f / attackRate;
+            }
+
         }
     }
 
@@ -23,6 +33,7 @@ public class PlayerCombatScript : MonoBehaviour
         foreach(Collider2D enemy in hitEnemies)
         {
             Debug.Log("We hit " + enemy.name);
+            enemy.GetComponent<EnemyScript>().TakeDamage(attackDamage);
         }
     }
 
