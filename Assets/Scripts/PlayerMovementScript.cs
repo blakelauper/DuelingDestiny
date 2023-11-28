@@ -1,6 +1,4 @@
-using System;
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class PlayerMovementScript : MonoBehaviour
@@ -8,8 +6,6 @@ public class PlayerMovementScript : MonoBehaviour
     Animator animator;
     Rigidbody2D rb;
     float MOVE_SPEED = 6.0f;
-    float JUMP_FORCE = 7.5f;
-    bool isGrounded = false;
     bool canAttack = true;
     float attackCooldown = 1f;
 
@@ -17,7 +13,6 @@ public class PlayerMovementScript : MonoBehaviour
     {
         Idle = 0,
         Running = 1,
-        Jumping = 2,
         Attacking = 3
     }
 
@@ -31,23 +26,7 @@ public class PlayerMovementScript : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKey(KeyCode.LeftArrow))
-        {
-            Move(-1.0f);
-        }
-        else if (Input.GetKey(KeyCode.RightArrow))
-        {
-            Move(1.0f);
-        }
-        else
-        {
-            Move(0.0f);
-        }
-
-        if (isGrounded && Input.GetKeyDown(KeyCode.UpArrow))
-        {
-            Jump();
-        }
+        Move();
 
         if (Input.GetKeyDown(KeyCode.B) && canAttack)
         {
@@ -61,45 +40,60 @@ public class PlayerMovementScript : MonoBehaviour
         {
             SetAnimationState();
         }
+
+        // Clamp player position to stay within camera bounds
+        ClampPlayerPosition();
     }
 
-    private void Move(float direction)
+    private void Move()
     {
-        rb.velocity = new Vector2(direction * MOVE_SPEED, rb.velocity.y);
+        float horizontal = 0.0f;
+        float vertical = 0.0f;
 
-        if (direction > 0.0f)
+        if (Input.GetKey(KeyCode.LeftArrow))
+        {
+            horizontal = -1.0f;
+        }
+        else if (Input.GetKey(KeyCode.RightArrow))
+        {
+            horizontal = 1.0f;
+        }
+
+        if (Input.GetKey(KeyCode.UpArrow))
+        {
+            vertical = 1.0f;
+        }
+        else if (Input.GetKey(KeyCode.DownArrow))
+        {
+            vertical = -1.0f;
+        }
+
+        Vector2 movement = new Vector2(horizontal, vertical);
+        movement.Normalize(); // Ensure that diagonal movement is not faster
+
+        rb.velocity = new Vector2(movement.x * MOVE_SPEED, movement.y * MOVE_SPEED);
+
+        if (movement.x > 0.0f)
         {
             gameObject.transform.localScale = new Vector3(-1, 1, 1);
         }
-        else if (direction < 0.0f)
+        else if (movement.x < 0.0f)
         {
             gameObject.transform.localScale = new Vector3(1, 1, 1);
         }
-    }
-
-    private void Jump()
-    {
-        rb.velocity = new Vector2(rb.velocity.x, JUMP_FORCE);
     }
 
     private void SetAnimationState()
     {
         AnimationStateEnum playerAnimationState;
 
-        if (isGrounded)
+        if (rb.velocity.magnitude < 0.01f)
         {
-            if (rb.velocity.x == 0.0f)
-            {
-                playerAnimationState = AnimationStateEnum.Idle;
-            }
-            else
-            {
-                playerAnimationState = AnimationStateEnum.Running;
-            }
+            playerAnimationState = AnimationStateEnum.Idle;
         }
         else
         {
-            playerAnimationState = AnimationStateEnum.Jumping;
+            playerAnimationState = AnimationStateEnum.Running;
         }
 
         animator.SetInteger("PlayerState", (int)playerAnimationState);
@@ -120,19 +114,23 @@ public class PlayerMovementScript : MonoBehaviour
         canAttack = true;
     }
 
-    private void OnCollisionEnter2D(Collision2D collision)
+    private void ClampPlayerPosition()
     {
-        if (collision.gameObject.tag.Equals("Ground"))
-        {
-            isGrounded = true;
-        }
+        Vector3 playerPos = transform.position;
+
+        float cameraHalfHeight = Camera.main.orthographicSize;
+        float cameraHalfWidth = cameraHalfHeight * Camera.main.aspect;
+
+        float maxY = Camera.main.transform.position.y + cameraHalfHeight - 1.5f; // Adjust the offset as needed
+        float minY = Camera.main.transform.position.y - cameraHalfHeight;
+        float maxX = Camera.main.transform.position.x + cameraHalfWidth - 1f;
+        float minX = Camera.main.transform.position.x - cameraHalfWidth + 1f;
+
+        playerPos.x = Mathf.Clamp(playerPos.x, minX, maxX);
+        playerPos.y = Mathf.Clamp(playerPos.y, minY, maxY);
+
+        transform.position = playerPos;
     }
 
-    private void OnCollisionExit2D(Collision2D collision)
-    {
-        if (collision.gameObject.tag.Equals("Ground"))
-        {
-            isGrounded = false;
-        }
-    }
+
 }
