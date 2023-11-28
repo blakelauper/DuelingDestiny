@@ -14,6 +14,20 @@ public class Player2CombatScript : MonoBehaviour
     public float attackRate = 1f;
     private float nextAttackTime = 0f;
 
+    public int health = 100;
+    public Animator animator;
+    Player2MovementScript player2MovementScript; // Reference to PlayerMovementScript
+
+
+    void Start()
+    {
+        player2MovementScript = GetComponent<Player2MovementScript>();
+        if (player2MovementScript == null)
+        {
+            Debug.LogError("Player2MovementScript not found on the same GameObject.");
+        }
+    }
+
     void Update()
     {
         if (Time.time >= nextAttackTime)
@@ -25,6 +39,43 @@ public class Player2CombatScript : MonoBehaviour
             }
 
         }
+    }
+
+
+    public void TakeDamage(int amount)
+    {
+        health -= amount;
+        animator.SetTrigger("Hurt");
+
+        if (health <= 0)
+        {
+            Die();
+        }
+    }
+
+    private void Die()
+    {
+        // Play death animation or any other death-related logic
+        animator.SetBool("IsDead", true);
+
+        // Disable the Collider to prevent further interactions
+        GetComponent<Collider2D>().enabled = false;
+
+        // Remove the Rigidbody component to prevent physics interactions
+        Rigidbody2D rb = GetComponent<Rigidbody2D>();
+        if (rb != null)
+        {
+            Destroy(rb);
+        }
+
+        // Disable the PlayerMovementScript if found
+        if (player2MovementScript != null)
+        {
+            player2MovementScript.enabled = false;
+        }
+
+        // Disable this script to stop any further updates
+        this.enabled = false;
     }
 
     private void Attack2()
@@ -43,4 +94,15 @@ public class Player2CombatScript : MonoBehaviour
             return;
         Gizmos.DrawWireSphere(attackPoint2.position, attackRange2);
     }
+
+    // Handle collisions with enemy objects
+    private void OnTriggerEnter2D(Collider2D other)
+    {
+        if (other.CompareTag("Enemy"))
+        {
+            // Assuming enemy deals 40 damage
+            TakeDamage(40);
+        }
+    }
+
 }
