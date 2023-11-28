@@ -4,6 +4,9 @@ using UnityEngine;
 
 public class PlayerCombatScript : MonoBehaviour
 {
+    [SerializeField]
+    private GameState gameState;
+
     public Transform attackPoint;
     public float attackRange = 0.7f;
     public LayerMask enemyLayers;
@@ -12,7 +15,6 @@ public class PlayerCombatScript : MonoBehaviour
     public float attackRate = 1f;
     private float nextAttackTime = 0f;
 
-    public int health = 100;
     public Animator animator;
     PlayerMovementScript playerMovementScript; // Reference to PlayerMovementScript
 
@@ -39,10 +41,10 @@ public class PlayerCombatScript : MonoBehaviour
 
     public void TakeDamage(int amount)
     {
-        health -= amount;
+        gameState.player1Health -= amount;
         animator.SetTrigger("Hurt");
 
-        if (health <= 0)
+        if (gameState.player1Health <= 0)
         {
             Die();
         }
@@ -96,7 +98,7 @@ public class PlayerCombatScript : MonoBehaviour
         if (other.CompareTag("Enemy"))
         {
             // Assuming enemy deals 40 damage
-            TakeDamage(40);
+            TakeDamage(gameState.basicEnemyDamage);
         }
     }
 }
