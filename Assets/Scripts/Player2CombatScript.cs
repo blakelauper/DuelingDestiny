@@ -45,12 +45,15 @@ public class Player2CombatScript : MonoBehaviour
 
     public void TakeDamage(int amount)
     {
-        gameState.player2Health -= amount;
-        animator.SetTrigger("Hurt");
-
-        if (gameState.player2Health <= 0)
+        if (gameState.player2Health > 0)
         {
-            Die();
+            gameState.player2Health -= amount;
+            animator.SetTrigger("Hurt");
+
+            if (gameState.player2Health <= 0)
+            {
+                Die();
+            }
         }
     }
 
@@ -58,7 +61,7 @@ public class Player2CombatScript : MonoBehaviour
     {
         // Play death animation or any other death-related logic
         animator.SetBool("IsDead", true);
-
+        gameState.player2Health = 0;
         // Disable the Collider to prevent further interactions
         
         

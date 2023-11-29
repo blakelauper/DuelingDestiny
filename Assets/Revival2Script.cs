@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class Revival2Script : MonoBehaviour
@@ -60,16 +61,27 @@ public class Revival2Script : MonoBehaviour
 
         // Reset death-related states
         player1Combat.animator.SetBool("IsDead", false);
-        player1Combat.animator.Play("LightBandit_CombatIdle");
-        
+        player1Combat.animator.SetTrigger("Recover");
 
-        // Enable the PlayerMovementScript if found
-        if (player1Combat.playerMovementScript != null)
+        Invoke("ActivatePlayer1Scripts", 0.99f);
+    }
+
+    // Activate Player2 scripts
+    private void ActivatePlayer1Scripts()
+    {
+        GameObject player2 = GameObject.FindGameObjectWithTag("Player1");
+        if (player2 != null)
         {
-            player1Combat.playerMovementScript.enabled = true;
-        }
+            PlayerCombatScript player2Combat = player2.GetComponent<PlayerCombatScript>();
 
-        // Enable the PlayerCombatScript to resume updates
-        player1Combat.enabled = true;
+            // Enable the PlayerMovementScript if found
+            if (player2Combat.playerMovementScript != null)
+            {
+                player2Combat.playerMovementScript.enabled = true;
+            }
+
+            // Enable the PlayerCombatScript to resume updates
+            player2Combat.enabled = true;
+        }
     }
 }

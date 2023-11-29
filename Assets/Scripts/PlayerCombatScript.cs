@@ -45,12 +45,15 @@ public class PlayerCombatScript : MonoBehaviour
 
     public void TakeDamage(int amount)
     {
-        gameState.player1Health -= amount;
-        animator.SetTrigger("Hurt");
-
-        if (gameState.player1Health <= 0)
+        if (gameState.player1Health > 0)
         {
-            Die();
+            gameState.player1Health -= amount;
+            animator.SetTrigger("Hurt");
+
+            if (gameState.player1Health <= 0)
+            {
+                Die();
+            }
         }
     }
 
@@ -58,9 +61,9 @@ public class PlayerCombatScript : MonoBehaviour
     {
         // Play death animation or any other death-related logic
         animator.SetBool("IsDead", true);
-
+        gameState.player1Health = 0;
         // Disable the Collider to prevent further interactions
-        
+
 
         // Remove the Rigidbody component to prevent physics interactions
         Rigidbody2D rb = GetComponent<Rigidbody2D>();

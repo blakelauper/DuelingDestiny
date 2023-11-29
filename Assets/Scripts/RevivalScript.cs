@@ -7,6 +7,7 @@ public class RevivalScript : MonoBehaviour
     [SerializeField]
     private GameState gameState;
     private bool playerInRevivalArea = false;
+
     // Check if any player is in the revival area
     private void OnTriggerEnter2D(Collider2D other)
     {
@@ -58,17 +59,28 @@ public class RevivalScript : MonoBehaviour
 
         // Reset death-related states
         player2Combat.animator.SetBool("IsDead", false);
-        player2Combat.animator.Play("HeavyBandit_CombatIdle");
-        
-        // Enable the PlayerMovementScript if found
-        if (player2Combat.player2MovementScript != null)
-        {
-            player2Combat.player2MovementScript.enabled = true;
-        }
+        player2Combat.animator.SetTrigger("Recover");
 
-        // Enable the PlayerCombatScript to resume updates
-        player2Combat.enabled = true;
+        // Delayed activation after 0.99 seconds
+        Invoke("ActivatePlayer2Scripts", 0.99f);
     }
 
-    
+    // Activate Player2 scripts
+    private void ActivatePlayer2Scripts()
+    {
+        GameObject player2 = GameObject.FindGameObjectWithTag("Player2");
+        if (player2 != null)
+        {
+            Player2CombatScript player2Combat = player2.GetComponent<Player2CombatScript>();
+
+            // Enable the PlayerMovementScript if found
+            if (player2Combat.player2MovementScript != null)
+            {
+                player2Combat.player2MovementScript.enabled = true;
+            }
+
+            // Enable the PlayerCombatScript to resume updates
+            player2Combat.enabled = true;
+        }
+    }
 }
