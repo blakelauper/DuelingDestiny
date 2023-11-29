@@ -14,8 +14,8 @@ GameObject:
   - component: {fileID: 30282786170958638}
   - component: {fileID: 7492734102314907406}
   m_Layer: 0
-  m_Name: ReviveAreaP1
-  m_TagString: Untagged
+  m_Name: ReviveArea
+  m_TagString: RevivePool
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -29,8 +29,8 @@ Transform:
   m_GameObject: {fileID: 69493314190079272}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 1.1500001, z: 0}
-  m_LocalScale: {x: 4.4715, y: 4.3595, z: 1}
+  m_LocalPosition: {x: -2.37, y: -5.46, z: 0}
+  m_LocalScale: {x: 2.3645291, y: 2.405136, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
@@ -76,7 +76,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: -99
-  m_Sprite: {fileID: -2413806693520163455, guid: a86470a33a6bf42c4b3595704624658b, type: 3}
+  m_Sprite: {fileID: 21300142, guid: 29c9cded5e558164aaf8c9bf08aa1510, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -119,9 +119,9 @@ CircleCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
+  m_Offset: {x: -0.009255508, y: 0.88885266}
   serializedVersion: 2
-  m_Radius: 0.5
+  m_Radius: 0.94298995
 --- !u!114 &30282786170958638
 MonoBehaviour:
   m_ObjectHideFlags: 0
