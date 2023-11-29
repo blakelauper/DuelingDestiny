@@ -62,26 +62,34 @@ public class Player2CombatScript : MonoBehaviour
         // Play death animation or any other death-related logic
         animator.SetBool("IsDead", true);
         gameState.player2Health = 0;
-        // Disable the Collider to prevent further interactions
-        
-        
+
+        // Get the Collider component
+        Collider2D collider = GetComponent<Collider2D>();
+        if (collider != null)
+        {
+            // Set the Collider to trigger
+            collider.isTrigger = true;
+        }
+
         // Remove the Rigidbody component to prevent physics interactions
         Rigidbody2D rb = GetComponent<Rigidbody2D>();
-        
+        if (rb != null)
+        {
+            // Set the Rigidbody to kinematic
+            rb.isKinematic = true;
+            rb.velocity = Vector2.zero;
+        }
+
         // Disable the PlayerMovementScript if found
         if (player2MovementScript != null)
         {
             player2MovementScript.enabled = false;
         }
 
-        if (rb != null)
-        {
-            rb.velocity = Vector2.zero;
-        }
-
         // Disable this script to stop any further updates
         this.enabled = false;
     }
+
 
     private void Attack2()
     {

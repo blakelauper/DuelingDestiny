@@ -66,6 +66,7 @@ public class RevivalScript : MonoBehaviour
     }
 
     // Activate Player2 scripts
+    // Activate Player2 scripts
     private void ActivatePlayer2Scripts()
     {
         GameObject player2 = GameObject.FindGameObjectWithTag("Player2");
@@ -81,6 +82,22 @@ public class RevivalScript : MonoBehaviour
 
             // Enable the PlayerCombatScript to resume updates
             player2Combat.enabled = true;
+
+            // Enable Rigidbody and set gravity scale to 0
+            Rigidbody2D rb = player2Combat.GetComponent<Rigidbody2D>();
+            if (rb != null)
+            {
+                rb.isKinematic = false;
+                rb.gravityScale = 0f;
+            }
+
+            // Disable isTrigger for the Collider
+            Collider2D collider = player2Combat.GetComponent<Collider2D>();
+            if (collider != null)
+            {
+                collider.isTrigger = false;
+            }
         }
     }
+
 }
