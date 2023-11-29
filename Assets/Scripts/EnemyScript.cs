@@ -10,6 +10,9 @@ public class EnemyScript : MonoBehaviour
     public int currentHealth;
     private EnemyMovementScript movementScript; // Reference to EnemyMovementScript
 
+    // Despawn delay in seconds
+    private float despawnDelay = 20f;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -55,6 +58,13 @@ public class EnemyScript : MonoBehaviour
             movementScript.enabled = false;
         }
 
-        this.enabled = false;
+        // Schedule despawn after the specified delay
+        Invoke("Despawn", despawnDelay);
+    }
+
+    private void Despawn()
+    {
+        // Destroy the GameObject after the delay
+        Destroy(gameObject);
     }
 }

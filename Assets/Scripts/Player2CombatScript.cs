@@ -2,7 +2,6 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
 public class Player2CombatScript : MonoBehaviour
 {
     [SerializeField]
@@ -16,11 +15,12 @@ public class Player2CombatScript : MonoBehaviour
     private float nextAttackTime = 0f;
 
     public Animator animator;
-    Player2MovementScript player2MovementScript; // Reference to PlayerMovementScript
+    public Player2MovementScript player2MovementScript; // Reference to PlayerMovementScript
 
 
     void Start()
     {
+        gameState.player2Health = 100;
         player2MovementScript = GetComponent<Player2MovementScript>();
         if (player2MovementScript == null)
         {
@@ -60,18 +60,19 @@ public class Player2CombatScript : MonoBehaviour
 
         // Disable the Collider to prevent further interactions
         GetComponent<Collider2D>().enabled = false;
-
+        
         // Remove the Rigidbody component to prevent physics interactions
         Rigidbody2D rb = GetComponent<Rigidbody2D>();
-        if (rb != null)
-        {
-            Destroy(rb);
-        }
-
+        
         // Disable the PlayerMovementScript if found
         if (player2MovementScript != null)
         {
             player2MovementScript.enabled = false;
+        }
+
+        if (rb != null)
+        {
+            rb.velocity = Vector2.zero;
         }
 
         // Disable this script to stop any further updates
@@ -104,5 +105,5 @@ public class Player2CombatScript : MonoBehaviour
             TakeDamage(gameState.basicEnemyDamage);
         }
     }
-
+    
 }

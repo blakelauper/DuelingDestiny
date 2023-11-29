@@ -1,12 +1,11 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
 public class PlayerCombatScript : MonoBehaviour
 {
     [SerializeField]
     private GameState gameState;
-
     public Transform attackPoint;
     public float attackRange = 0.7f;
     public LayerMask enemyLayers;
@@ -16,10 +15,13 @@ public class PlayerCombatScript : MonoBehaviour
     private float nextAttackTime = 0f;
 
     public Animator animator;
-    PlayerMovementScript playerMovementScript; // Reference to PlayerMovementScript
+    public PlayerMovementScript playerMovementScript; // Reference to PlayerMovementScript
+
 
     void Start()
     {
+        gameState.player1Health = 100;
+        animator = GetComponent<Animator>();
         playerMovementScript = GetComponent<PlayerMovementScript>();
         if (playerMovementScript == null)
         {
@@ -36,8 +38,10 @@ public class PlayerCombatScript : MonoBehaviour
                 Attack();
                 nextAttackTime = Time.time + 1f / attackRate;
             }
+
         }
     }
+
 
     public void TakeDamage(int amount)
     {
@@ -47,16 +51,6 @@ public class PlayerCombatScript : MonoBehaviour
         if (gameState.player1Health <= 0)
         {
             Die();
-        }
-    }
-
-    private void Attack()
-    {
-        Collider2D[] hitEnemies = Physics2D.OverlapCircleAll(attackPoint.position, attackRange, enemyLayers);
-        foreach (Collider2D enemy in hitEnemies)
-        {
-            Debug.Log("We hit " + enemy.name);
-            enemy.GetComponent<EnemyScript>().TakeDamage(attackDamage);
         }
     }
 
@@ -70,10 +64,6 @@ public class PlayerCombatScript : MonoBehaviour
 
         // Remove the Rigidbody component to prevent physics interactions
         Rigidbody2D rb = GetComponent<Rigidbody2D>();
-        if (rb != null)
-        {
-            Destroy(rb);
-        }
 
         // Disable the PlayerMovementScript if found
         if (playerMovementScript != null)
@@ -81,8 +71,23 @@ public class PlayerCombatScript : MonoBehaviour
             playerMovementScript.enabled = false;
         }
 
+        if (rb != null)
+        {
+            rb.velocity = Vector2.zero;
+        }
+
         // Disable this script to stop any further updates
         this.enabled = false;
+    }
+
+    private void Attack()
+    {
+        Collider2D[] hitEnemies = Physics2D.OverlapCircleAll(attackPoint.position, attackRange, enemyLayers);
+        foreach (Collider2D enemy in hitEnemies)
+        {
+            Debug.Log("We hit " + enemy.name);
+            enemy.GetComponent<EnemyScript>().TakeDamage(attackDamage);
+        }
     }
 
     private void OnDrawGizmosSelected()
@@ -101,4 +106,5 @@ public class PlayerCombatScript : MonoBehaviour
             TakeDamage(gameState.basicEnemyDamage);
         }
     }
+
 }
