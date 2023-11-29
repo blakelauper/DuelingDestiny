@@ -6,16 +6,33 @@ public class RevivalScript : MonoBehaviour
 {
     [SerializeField]
     private GameState gameState;
-
+    private bool playerInRevivalArea = false;
     // Check if any player is in the revival area
-    private void OnTriggerStay2D(Collider2D other)
+    private void OnTriggerEnter2D(Collider2D other)
     {
-        if (other.CompareTag("Player1") && Input.GetKeyDown(KeyCode.R))
+        if (other.CompareTag("Player1"))
         {
-            Debug.Log("P1 is reviving P2");
+            playerInRevivalArea = true;
+            Debug.Log("Player1 entered revival area");
+        }
+    }
+
+    private void OnTriggerExit2D(Collider2D other)
+    {
+        if (other.CompareTag("Player1"))
+        {
+            playerInRevivalArea = false;
+            Debug.Log("Player1 exited revival area");
+        }
+    }
+
+    private void Update()
+    {
+        if (playerInRevivalArea && Input.GetKeyDown(KeyCode.R))
+        {
+            Debug.Log("P2 is reviving P1");
             CanRevivePlayer2();
         }
-        
     }
 
     // Revive both players
@@ -42,19 +59,7 @@ public class RevivalScript : MonoBehaviour
         // Reset death-related states
         player2Combat.animator.SetBool("IsDead", false);
         player2Combat.animator.Play("HeavyBandit_CombatIdle");
-        // Enable the Collider for interactions
-        player2Combat.GetComponent<Collider2D>().enabled = true;
-
-        // Add the Rigidbody component for physics interactions (if needed)
-        Rigidbody2D rb = player2Combat.GetComponent<Rigidbody2D>();
-        if (rb == null)
-        {
-            rb = player2Combat.gameObject.AddComponent<Rigidbody2D>();
-        }
-
-        // Set gravity scale to 0
-        rb.gravityScale = 0;
-
+        
         // Enable the PlayerMovementScript if found
         if (player2Combat.player2MovementScript != null)
         {

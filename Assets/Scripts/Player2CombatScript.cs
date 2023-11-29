@@ -7,6 +7,7 @@ public class Player2CombatScript : MonoBehaviour
     [SerializeField]
     private GameState gameState;
     public Transform attackPoint2;
+    
     public float attackRange2 = 0.7f;
     public LayerMask enemyLayers;
 
@@ -59,7 +60,7 @@ public class Player2CombatScript : MonoBehaviour
         animator.SetBool("IsDead", true);
 
         // Disable the Collider to prevent further interactions
-        GetComponent<Collider2D>().enabled = false;
+        
         
         // Remove the Rigidbody component to prevent physics interactions
         Rigidbody2D rb = GetComponent<Rigidbody2D>();
@@ -94,6 +95,7 @@ public class Player2CombatScript : MonoBehaviour
         if (attackPoint2 == null)
             return;
         Gizmos.DrawWireSphere(attackPoint2.position, attackRange2);
+
     }
 
     // Handle collisions with enemy objects

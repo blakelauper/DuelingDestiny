@@ -60,7 +60,7 @@ public class PlayerCombatScript : MonoBehaviour
         animator.SetBool("IsDead", true);
 
         // Disable the Collider to prevent further interactions
-        GetComponent<Collider2D>().enabled = false;
+        
 
         // Remove the Rigidbody component to prevent physics interactions
         Rigidbody2D rb = GetComponent<Rigidbody2D>();
