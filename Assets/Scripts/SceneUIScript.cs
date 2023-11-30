@@ -19,14 +19,14 @@ public class SceneUIScript : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        player1HP.text = "Player1 HP: " + gameState.player1Health.ToString() + "/100";
-        player2HP.text = "Player2 HP: " + gameState.player2Health.ToString() + "/100";
+        player1HP.text = gameState.Player1Name + "'s HP: " + gameState.player1Health.ToString() + "/100";
+        player2HP.text = gameState.Player2Name + "'s HP: " + gameState.player2Health.ToString() + "/100";
     }
 
     // Update is called once per frame
     void Update()
     {
-        player1HP.text = "Player1 HP: " + gameState.player1Health.ToString() + "/100";
-        player2HP.text = "Player2 HP: " + gameState.player2Health.ToString() + "/100";
+        player1HP.text = gameState.Player1Name + "'s HP: " + gameState.player1Health.ToString() + "/100";
+        player2HP.text = gameState.Player2Name + "'s HP: " + gameState.player2Health.ToString() + "/100";
     }
 }
