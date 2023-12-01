@@ -10,7 +10,7 @@ public class Player2CombatScript : MonoBehaviour
     
     public float attackRange2 = 0.7f;
     public LayerMask enemyLayers;
-
+    public bool isInvincible = false;
     public int attackDamage = 50;
     public float attackRate = 1f;
     private float nextAttackTime = 0f;
@@ -22,6 +22,7 @@ public class Player2CombatScript : MonoBehaviour
     void Start()
     {
         gameState.player2Health = 100;
+        isInvincible = false;
         player2MovementScript = GetComponent<Player2MovementScript>();
         if (player2MovementScript == null)
         {
@@ -112,11 +113,27 @@ public class Player2CombatScript : MonoBehaviour
     // Handle collisions with enemy objects
     private void OnTriggerEnter2D(Collider2D other)
     {
-        if (other.CompareTag("Enemy"))
+        if (isInvincible == false)
         {
-            // Assuming enemy deals 40 damage
-            TakeDamage(gameState.basicEnemyDamage);
+            if (other.CompareTag("Enemy"))
+            {
+                // Assuming enemy deals 40 damage
+                TakeDamage(gameState.basicEnemyDamage);
+            }
         }
     }
-    
+
+    public void ActivateInvincibility()
+    {
+        isInvincible = true;
+        StartCoroutine(DeactivateInvincibilityAfterDelay());
+    }
+
+    // Coroutine to deactivate invincibility after a delay (e.g., 10 seconds)
+    private IEnumerator DeactivateInvincibilityAfterDelay()
+    {
+        yield return new WaitForSeconds(10f);
+        isInvincible = false;
+    }
+
 }

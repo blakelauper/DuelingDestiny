@@ -43,6 +43,24 @@ TagManager:
   - 
   - 
   m_SortingLayers:
+  - name: WaterBorder
+    uniqueID: 3203951017
+    locked: 0
+  - name: GrassLayer
+    uniqueID: 91011259
+    locked: 0
+  - name: HillsLayer
+    uniqueID: 4161493859
+    locked: 0
+  - name: StairsLayer
+    uniqueID: 2655927815
+    locked: 0
+  - name: WallsLayer
+    uniqueID: 168989643
+    locked: 0
+  - name: WaterLayer
+    uniqueID: 3743298503
+    locked: 0
   - name: Default
     uniqueID: 0
     locked: 0
