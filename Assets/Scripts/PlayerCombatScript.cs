@@ -21,7 +21,7 @@ public class PlayerCombatScript : MonoBehaviour
 
     void Start()
     {
-        isInvincible = false;
+        isInvincible = false; gameState.P1isInvincible = false;
         gameState.player1Health = 100;
         animator = GetComponent<Animator>();
         playerMovementScript = GetComponent<PlayerMovementScript>();

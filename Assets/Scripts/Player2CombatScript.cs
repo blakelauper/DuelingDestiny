@@ -23,6 +23,7 @@ public class Player2CombatScript : MonoBehaviour
     {
         gameState.player2Health = 100;
         isInvincible = false;
+        gameState.P2isInvincible = false;
         player2MovementScript = GetComponent<Player2MovementScript>();
         if (player2MovementScript == null)
         {
