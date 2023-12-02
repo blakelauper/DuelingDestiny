@@ -126,6 +126,7 @@ public class Player2CombatScript : MonoBehaviour
     public void ActivateInvincibility()
     {
         isInvincible = true;
+        gameState.P2isInvincible = true;
         StartCoroutine(DeactivateInvincibilityAfterDelay());
     }
 
@@ -134,6 +135,7 @@ public class Player2CombatScript : MonoBehaviour
     {
         yield return new WaitForSeconds(10f);
         isInvincible = false;
+        gameState.P2isInvincible = false;
     }
 
 }

@@ -13,5 +13,6 @@ public class GameState : ScriptableObject
     public string Player1Name = "NONAME";
     public string Player2Name = "NONAME2";
 
-    
+    public bool P1isInvincible = false;
+    public bool P2isInvincible = false;
 }

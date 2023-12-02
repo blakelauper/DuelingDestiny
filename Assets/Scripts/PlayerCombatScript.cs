@@ -14,12 +14,14 @@ public class PlayerCombatScript : MonoBehaviour
     public float attackRate = 1f;
     private float nextAttackTime = 0f;
 
+    bool isInvincible;
     public Animator animator;
     public PlayerMovementScript playerMovementScript; // Reference to PlayerMovementScript
 
 
     void Start()
     {
+        isInvincible = false;
         gameState.player1Health = 100;
         animator = GetComponent<Animator>();
         playerMovementScript = GetComponent<PlayerMovementScript>();
@@ -111,11 +113,29 @@ public class PlayerCombatScript : MonoBehaviour
     // Handle collisions with enemy objects
     private void OnTriggerEnter2D(Collider2D other)
     {
-        if (other.CompareTag("Enemy"))
+        if (isInvincible == false)
         {
-            // Assuming enemy deals 40 damage
-            TakeDamage(gameState.basicEnemyDamage);
+            if (other.CompareTag("Enemy"))
+            {
+                // Assuming enemy deals 40 damage
+                TakeDamage(gameState.basicEnemyDamage);
+            }
         }
+    }
+
+    public void ActivateInvincibility()
+    {
+        isInvincible = true;
+        gameState.P1isInvincible = true;
+        StartCoroutine(DeactivateInvincibilityAfterDelay());
+    }
+
+    // Coroutine to deactivate invincibility after a delay (e.g., 10 seconds)
+    private IEnumerator DeactivateInvincibilityAfterDelay()
+    {
+        yield return new WaitForSeconds(10f);
+        isInvincible = false;
+        gameState.P1isInvincible = false;
     }
 
 }

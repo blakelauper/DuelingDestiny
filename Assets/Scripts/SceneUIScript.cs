@@ -12,15 +12,20 @@ public class SceneUIScript : MonoBehaviour
     private TextMeshProUGUI player1HP;
     [SerializeField]
     private TextMeshProUGUI player2HP;
-
+    [SerializeField]
+    private TextMeshProUGUI player1Shield;
+    [SerializeField]
+    private TextMeshProUGUI player2Shield;
     // Placeholder text for Player 1 and Player 2 names
-    
+
 
     // Start is called before the first frame update
     void Start()
     {
         player1HP.text = gameState.Player1Name + "'s HP: " + gameState.player1Health.ToString() + "/100";
         player2HP.text = gameState.Player2Name + "'s HP: " + gameState.player2Health.ToString() + "/100";
+        player1Shield.text = "";
+        player2Shield.text = "";
     }
 
     // Update is called once per frame
@@ -28,5 +33,24 @@ public class SceneUIScript : MonoBehaviour
     {
         player1HP.text = gameState.Player1Name + "'s HP: " + gameState.player1Health.ToString() + "/100";
         player2HP.text = gameState.Player2Name + "'s HP: " + gameState.player2Health.ToString() + "/100";
+
+        if (gameState.P1isInvincible)
+        {
+            player1Shield.text = gameState.Player1Name + " is Invincible!";
+        }
+        else if (gameState.P1isInvincible == false)
+        {
+            player1Shield.text = "";
+        }
+
+
+        if (gameState.P2isInvincible)
+        {
+            player2Shield.text = gameState.Player2Name + " is Invincible!";
+        }
+        else if (gameState.P2isInvincible == false)
+        {
+            player2Shield.text = "";
+        }
     }
 }
