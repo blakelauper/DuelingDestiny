@@ -121,6 +121,10 @@ public class Player2CombatScript : MonoBehaviour
                 // Assuming enemy deals 40 damage
                 TakeDamage(gameState.basicEnemyDamage);
             }
+            else if (other.CompareTag("Enemy2"))
+            {
+                TakeDamage(gameState.Enemy2Damage);
+            }
         }
     }
 

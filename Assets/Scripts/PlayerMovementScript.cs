@@ -8,21 +8,24 @@ public class PlayerMovementScript : MonoBehaviour
     float MOVE_SPEED = 6.0f;
     bool canAttack = true;
     float attackCooldown = 1f;
-
+    
     private enum AnimationStateEnum
     {
         Idle = 0,
         Running = 1,
         Attacking = 3
     }
-
+    
     // Start is called before the first frame update
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
         animator = GetComponent<Animator>();
+        
     }
-
+   
+    // Start is called before the first frame update
+   
     // Update is called once per frame
     void Update()
     {

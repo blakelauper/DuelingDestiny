@@ -10,6 +10,8 @@ public class PlayerCombatScript : MonoBehaviour
     public float attackRange = 0.7f;
     public LayerMask enemyLayers;
 
+    private int keysNeeded = 5;
+
     public int attackDamage = 50;
     public float attackRate = 1f;
     private float nextAttackTime = 0f;
@@ -29,7 +31,11 @@ public class PlayerCombatScript : MonoBehaviour
         {
             Debug.LogError("PlayerMovementScript not found on the same GameObject.");
         }
+        gameState.keyCount = 0;
+        gameState.keysNeeded = keysNeeded;
     }
+    
+
 
     void Update()
     {
@@ -119,6 +125,10 @@ public class PlayerCombatScript : MonoBehaviour
             {
                 // Assuming enemy deals 40 damage
                 TakeDamage(gameState.basicEnemyDamage);
+            }
+            else if (other.CompareTag("Enemy2"))
+            {
+                TakeDamage(gameState.Enemy2Damage);
             }
         }
     }
