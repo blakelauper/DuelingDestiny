@@ -9,7 +9,7 @@ public class BossSceneChangeScript : MonoBehaviour
     {
         if (collision.tag == "Player1" || collision.tag == "Player2")
         {
-            SceneManager.LoadScene("Scene2");
+            SceneManager.LoadScene("SceneBoss");
         }
 
     }
