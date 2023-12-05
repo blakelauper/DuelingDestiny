@@ -33,7 +33,7 @@ public class MenuScript : MonoBehaviour
             {
                 gameState.Player1Name = player1NameInput;
                 gameState.Player2Name = player2NameInput;
-                SceneManager.LoadScene("Scene1");
+                SceneManager.LoadScene("SceneBoss");
             }
         }
     }

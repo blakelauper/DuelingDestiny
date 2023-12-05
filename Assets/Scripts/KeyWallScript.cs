@@ -12,7 +12,7 @@ public class KeyWallScript : MonoBehaviour
     private int playersTouching = 0;
     private void Start()
     {
-        gameState.keyCount = 5;
+        gameState.keyCount = 0;
     }
     
     private void OnCollisionEnter2D(Collision2D collision)
