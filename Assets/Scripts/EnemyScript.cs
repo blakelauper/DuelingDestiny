@@ -9,7 +9,7 @@ public class EnemyScript : MonoBehaviour
     public int maxHealth = 100;
     public int currentHealth;
     private EnemyMovementScript movementScript; // Reference to EnemyMovementScript
-
+    private BossMovementScript bossMovementScript;
     // Despawn delay in seconds
     private float despawnDelay = 20f;
 
@@ -22,6 +22,11 @@ public class EnemyScript : MonoBehaviour
         if (movementScript == null)
         {
             Debug.LogError("EnemyMovementScript not found on the same GameObject.");
+        }
+        bossMovementScript = GetComponent<BossMovementScript>();
+        if (bossMovementScript == null)
+        {
+            Debug.LogError("BossMovementScript not on object");
         }
     }
 
@@ -57,7 +62,10 @@ public class EnemyScript : MonoBehaviour
         {
             movementScript.enabled = false;
         }
-
+        if (bossMovementScript != null)
+        {
+            bossMovementScript.enabled = false;
+        }
         // Schedule despawn after the specified delay
         Invoke("Despawn", despawnDelay);
     }

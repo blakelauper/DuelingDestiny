@@ -11,6 +11,8 @@ public class GameState : ScriptableObject
 
     public int basicEnemyDamage = 40;
     public int Enemy2Damage = 50;
+    public int BossDamage = 99;
+    public int DoubleTeam = 25;
 
     public int keyCount = 0;
     public int keysNeeded = 5;

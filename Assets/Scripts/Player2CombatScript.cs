@@ -125,6 +125,14 @@ public class Player2CombatScript : MonoBehaviour
             {
                 TakeDamage(gameState.Enemy2Damage);
             }
+            else if (other.CompareTag("Boss1"))
+            {
+                TakeDamage(gameState.BossDamage);
+            }
+            else if (other.CompareTag("DoubleTeam"))
+            {
+                TakeDamage(gameState.DoubleTeam);
+            }
         }
     }
 

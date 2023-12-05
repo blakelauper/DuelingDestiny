@@ -10,6 +10,8 @@ TagManager:
   - Player1
   - RevivePool
   - Enemy2
+  - Boss1
+  - DoubleTeam
   layers:
   - Default
   - TransparentFX
