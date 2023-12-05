@@ -24,12 +24,12 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3444575721797055647}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -5.75, y: -1.79, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -10.85381, y: 3.0333242, z: 0.16253598}
+  m_LocalScale: {x: 2.5656896, y: 2.5221894, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 5494691135765541072}
+  m_Father: {fileID: 8616380195414740958}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &4843290582518323826
 GameObject:
@@ -55,12 +55,12 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4843290582518323826}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 1.41, y: -1.89, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 7.516527, y: 2.781106, z: 0.16253598}
+  m_LocalScale: {x: 2.5656896, y: 2.5221894, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 5494691135765541072}
+  m_Father: {fileID: 8616380195414740958}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &7766312001629347388
 GameObject:
@@ -96,9 +96,7 @@ Transform:
   m_LocalPosition: {x: 3.8989048, y: 7.5480437, z: 0.16253598}
   m_LocalScale: {x: 2.5656896, y: 2.5221894, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children:
-  - {fileID: 2153051731013277992}
-  - {fileID: 9167495691655509332}
+  m_Children: []
   m_Father: {fileID: 8616380195414740958}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &72474295605775710
@@ -276,6 +274,8 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 5494691135765541072}
+  - {fileID: 2153051731013277992}
+  - {fileID: 9167495691655509332}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &6212988143960711320
@@ -338,13 +338,7 @@ PrefabInstance:
     - {fileID: 5459591266499029953, guid: e17c3f9bad7a16f4282d56c58a479be3, type: 3}
     - {fileID: 6124756837667428900, guid: e17c3f9bad7a16f4282d56c58a479be3, type: 3}
     m_RemovedGameObjects: []
-    m_AddedGameObjects:
-    - targetCorrespondingSourceObject: {fileID: 7596449620284286648, guid: e17c3f9bad7a16f4282d56c58a479be3, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 2153051731013277992}
-    - targetCorrespondingSourceObject: {fileID: 7596449620284286648, guid: e17c3f9bad7a16f4282d56c58a479be3, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 9167495691655509332}
+    m_AddedGameObjects: []
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 5405560736420513417, guid: e17c3f9bad7a16f4282d56c58a479be3, type: 3}
       insertIndex: -1

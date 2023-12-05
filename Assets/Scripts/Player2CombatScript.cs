@@ -54,6 +54,7 @@ public class Player2CombatScript : MonoBehaviour
 
             if (gameState.player2Health <= 0)
             {
+                
                 Die();
             }
         }
@@ -64,7 +65,7 @@ public class Player2CombatScript : MonoBehaviour
         // Play death animation or any other death-related logic
         animator.SetBool("IsDead", true);
         gameState.player2Health = 0;
-
+        gameState.Player2Dead = true;
         // Get the Collider component
         Collider2D collider = GetComponent<Collider2D>();
         if (collider != null)

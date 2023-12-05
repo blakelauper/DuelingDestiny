@@ -9,6 +9,9 @@ public class GameState : ScriptableObject
     public int player1Health = 100;
     public int player2Health = 100;
 
+    public bool Player1Dead = false;
+    public bool Player2Dead = false;
+
     public int basicEnemyDamage = 40;
     public int Enemy2Damage = 50;
     public int BossDamage = 99;

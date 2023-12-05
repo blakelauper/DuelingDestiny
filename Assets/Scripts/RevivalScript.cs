@@ -60,7 +60,7 @@ public class RevivalScript : MonoBehaviour
         // Reset death-related states
         player2Combat.animator.SetBool("IsDead", false);
         player2Combat.animator.SetTrigger("Recover");
-
+        gameState.Player2Dead = false;
         // Delayed activation after 0.99 seconds
         Invoke("ActivatePlayer2Scripts", 0.99f);
     }
@@ -82,7 +82,7 @@ public class RevivalScript : MonoBehaviour
 
             // Enable the PlayerCombatScript to resume updates
             player2Combat.enabled = true;
-
+            
             // Enable Rigidbody and set gravity scale to 0
             Rigidbody2D rb = player2Combat.GetComponent<Rigidbody2D>();
             if (rb != null)

@@ -44,7 +44,7 @@ public class EnemyScript : MonoBehaviour
     {
         // Make enemy position static
         Debug.Log("Enemy Died");
-
+        
         animator.SetBool("IsDead", true);
 
         // Disable the Collider to prevent further interactions

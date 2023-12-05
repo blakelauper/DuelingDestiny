@@ -49,7 +49,7 @@ public class PlayerCombatScript : MonoBehaviour
 
         }
     }
-
+    
 
     public void TakeDamage(int amount)
     {
@@ -60,6 +60,7 @@ public class PlayerCombatScript : MonoBehaviour
 
             if (gameState.player1Health <= 0)
             {
+                
                 Die();
             }
         }
@@ -70,7 +71,7 @@ public class PlayerCombatScript : MonoBehaviour
         // Play death animation or any other death-related logic
         animator.SetBool("IsDead", true);
         gameState.player1Health = 0;
-
+        gameState.Player1Dead = true;
         // Get the Collider component
         Collider2D collider = GetComponent<Collider2D>();
         if (collider != null)

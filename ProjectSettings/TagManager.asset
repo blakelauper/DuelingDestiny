@@ -67,3 +67,6 @@ TagManager:
   - name: Default
     uniqueID: 0
     locked: 0
+  - name: WaterSplash
+    uniqueID: 1434764311
+    locked: 0

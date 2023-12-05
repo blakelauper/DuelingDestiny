@@ -62,7 +62,7 @@ public class Revival2Script : MonoBehaviour
         // Reset death-related states
         player1Combat.animator.SetBool("IsDead", false);
         player1Combat.animator.SetTrigger("Recover");
-
+        gameState.Player1Dead = false;
         Invoke("ActivatePlayer1Scripts", 0.99f);
     }
 
