@@ -40,10 +40,12 @@ public class DoubleTeamScript : MonoBehaviour
         // Check if the collision is with a player
         if (collision.gameObject.CompareTag("Player1"))
         {
+            animator.SetTrigger("Hurt");
             p1Collided = true;
         }
         else if (collision.gameObject.CompareTag("Player2"))
         {
+            animator.SetTrigger("Hurt");
             p2Collided = true;
         }
 
