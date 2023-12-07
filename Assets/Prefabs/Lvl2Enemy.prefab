@@ -177,7 +177,7 @@ GameObject:
   - component: {fileID: 1435719066870292815}
   m_Layer: 6
   m_Name: HarderEnemy
-  m_TagString: Untagged
+  m_TagString: Enemy2
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -362,6 +362,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cde0e1dde760e664b818c708e21d8c23, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  gameState: {fileID: 11400000, guid: e7f15990afab65343a131133fb4e589c, type: 2}
   animator: {fileID: 6557631014022651432}
   maxHealth: 200
   currentHealth: 0

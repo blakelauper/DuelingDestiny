@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 5670124926175293262}
   m_Layer: 0
   m_Name: SkeletonStart
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -259,6 +259,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cde0e1dde760e664b818c708e21d8c23, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  gameState: {fileID: 0}
   animator: {fileID: 2723976273279834005}
   maxHealth: 100
   currentHealth: 0

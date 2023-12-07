@@ -35,7 +35,7 @@ public class Player2CombatScript : MonoBehaviour
     {
         if (Time.time >= nextAttackTime)
         {
-            if (Input.GetKeyDown(KeyCode.Y))
+            if (Input.GetKeyDown(KeyCode.E))
             {
                 Attack2();
                 nextAttackTime = Time.time + 1f / attackRate;

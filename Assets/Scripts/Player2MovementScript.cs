@@ -28,7 +28,7 @@ public class Player2MovementScript : MonoBehaviour
     {
         Move();
 
-        if (Input.GetKeyDown(KeyCode.Y) && canAttack)
+        if (Input.GetKeyDown(KeyCode.E) && canAttack)
         {
             StartCoroutine(AttackCooldown());
             animator.SetInteger("PlayerState", (int)AnimationStateEnum.Attacking);

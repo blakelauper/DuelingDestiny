@@ -31,7 +31,7 @@ public class PlayerMovementScript : MonoBehaviour
     {
         Move();
 
-        if (Input.GetKeyDown(KeyCode.B) && canAttack)
+        if (Input.GetKeyDown(KeyCode.Period) && canAttack)
         {
             StartCoroutine(AttackCooldown());
             animator.SetInteger("PlayerState", (int)AnimationStateEnum.Attacking);
