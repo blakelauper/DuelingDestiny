@@ -5,6 +5,8 @@ using UnityEngine;
 
 public class EnemyScript : MonoBehaviour
 {
+    [SerializeField]
+    GameState gameState;
     public Animator animator;
     public int maxHealth = 100;
     public int currentHealth;
@@ -64,6 +66,7 @@ public class EnemyScript : MonoBehaviour
         }
         if (bossMovementScript != null)
         {
+            gameState.bossCount--;
             bossMovementScript.enabled = false;
         }
         // Schedule despawn after the specified delay

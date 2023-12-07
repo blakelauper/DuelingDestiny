@@ -5,6 +5,8 @@ using UnityEngine;
 
 public class DoubleTeamScript : MonoBehaviour
 {
+    [SerializeField]
+    GameState gameState;
     public Animator animator;
     public int maxHealth = 100;
     public int currentHealth;
@@ -26,13 +28,11 @@ public class DoubleTeamScript : MonoBehaviour
         movementScript = GetComponent<EnemyMovementScript>();
         if (movementScript == null)
         {
+            
             Debug.LogError("EnemyMovementScript not found on the same GameObject.");
         }
-        bossMovementScript = GetComponent<BossMovementScript>();
-        if (bossMovementScript == null)
-        {
-            Debug.LogError("BossMovementScript not on object");
-        }
+        
+        
     }
     private void OnTriggerEnter2D(Collider2D collision)
     {
@@ -87,7 +87,7 @@ public class DoubleTeamScript : MonoBehaviour
         {
             movementScript.enabled = false;
         }
-
+        gameState.bossCount--;
         // Schedule despawn after the specified delay
         Invoke("Despawn", despawnDelay);
     }

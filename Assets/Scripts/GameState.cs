@@ -11,6 +11,8 @@ public class GameState : ScriptableObject
 
     public bool Player1Dead = false;
     public bool Player2Dead = false;
+    public int bossCount = 4;
+
 
     public int basicEnemyDamage = 40;
     public int Enemy2Damage = 50;
