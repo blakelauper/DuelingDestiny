@@ -14,13 +14,14 @@ public class DoubleTeamScript : MonoBehaviour
     private BossMovementScript bossMovementScript;
     // Despawn delay in seconds
     private float despawnDelay = 20f;
-
+    private bool isDying = false;
     private bool p1Collided = false;
     private bool p2Collided = false;
 
     // Start is called before the first frame update
     void Start()
     {
+        isDying = false;
         p1Collided = false;
         p2Collided = false ;
         currentHealth = maxHealth;
@@ -49,9 +50,10 @@ public class DoubleTeamScript : MonoBehaviour
     }
     private void Update()
     {
-        if (p1Collided == true && p2Collided  == true)
+        if (p1Collided == true && p2Collided  == true && !isDying)
         {
-            TakeDamage(400);
+            isDying = true;
+            TakeDamage(1000);
         }
     }
 

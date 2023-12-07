@@ -28566,6 +28566,10 @@ PrefabInstance:
       propertyPath: gameState
       value: 
       objectReference: {fileID: 11400000, guid: e7f15990afab65343a131133fb4e589c, type: 2}
+    - target: {fileID: 7766312001629347388, guid: 6aacabf292906b24da59b9f8d606a37b, type: 3}
+      propertyPath: m_TagString
+      value: DoubleTeam
+      objectReference: {fileID: 0}
     - target: {fileID: 8616380195414740958, guid: 6aacabf292906b24da59b9f8d606a37b, type: 3}
       propertyPath: m_LocalPosition.x
       value: 2.1010952

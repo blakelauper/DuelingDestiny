@@ -14,6 +14,7 @@ public class WMenuScript : MonoBehaviour
 
     private void Start()
     {
+
         gameState.bossCount = 4;
         Victory.text = "----------------------- VICTORY! -----------------------";
     }
@@ -28,6 +29,8 @@ public class WMenuScript : MonoBehaviour
 
     public void EnableVictoryMenu()
     {
+        gameState.player1Health = 1000;
+        gameState.player2Health = 1000;
         VictoryMenu.SetActive(true);
     }
 
